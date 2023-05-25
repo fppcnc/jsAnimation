@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<style>
+    #container {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background: yellow;
+    }
+
+    #animate {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        background-color: red;
+    }
+</style>
+<body>
+
+<p>
+    <button onclick="myMove()">Right then Down</button>
+    <button onclick="myMove2()">From Left to Right</button>
+</p>
+
+<div id="container">
+    <div id="animate"></div>
+</div>
+
+<!--
+Aufgabe: das rote Quadrat soll erst nach rechts fahren (innerhalb der gelben Fläche),
+ ist es dort angekommen, soll es senkrecht nach unten fahren (innerhalb der gelben Fläche)
+ und dort stehen bleiben-->
+
+<script>
+    function myMove() {
+        let id = null;
+        const elem = document.getElementById("animate");
+        let x = 0;
+        let y = 0;
+        console.log(x + ' ' + y);
+        clearInterval(id);
+        id = setInterval(frame, 5);
+
+        function frame() {
+            if (x == 350) {
+                if (y == 350) {
+                    // elem.style.left = 0 + "px";
+                    // elem.style.top = 0 + "px";
+                    clearInterval(id);
+                } else {
+                    y++;
+                    elem.style.top = y + "px";
+                }
+            } else {
+                x++;
+                elem.style.top = y + "px";
+                elem.style.left = x + "px";
+            }
+        }
+    }
+
+    function myMove2() {
+        let id = null;
+        const elem = document.getElementById("animate");
+        let x = 0;
+        let y = 0;
+        // console.log(x+' '+y);
+        clearInterval(id);
+        id = setInterval(frame, 5);
+
+        function frame() {
+            if (x == 350 && y >= 350) {
+                clearInterval(id);
+            } else {
+                if (x == 350 && y < 350) {
+                    y=y + 100;
+                    if (y >= 350) {
+                        clearInterval(id);
+                    } else {
+                        x = 0;
+                        x++;
+                        elem.style.left = x + "px";
+                        elem.style.top = y + "px";
+
+                    }
+                } else {
+                    x++;
+                    elem.style.top = y + "px";
+                    elem.style.left = x + "px";
+                }
+            }
+            
+        }
+    }
+
+
+</script>
+</body>
+</html>
