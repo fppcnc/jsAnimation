@@ -20,12 +20,14 @@
 <p>
     <button onclick="myMove()">Right then Down</button>
     <button onclick="myMove2()">From Left to Right</button>
+    <button onclick="stopRightThere()">Stop it Right There!</button>
+
 </p>
 
 <div id="container">
     <div id="animate"></div>
 </div>
-
+<button onclick="reset()">Restart</button>
 <!--
 Aufgabe: das rote Quadrat soll erst nach rechts fahren (innerhalb der gelben Fläche),
  ist es dort angekommen, soll es senkrecht nach unten fahren (innerhalb der gelben Fläche)
@@ -37,12 +39,37 @@ bei jeder Wende soll es 100 px nach unten fahren,
 dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist.-->
 
 <script>
+
+    let id = null;
+    const elem = document.getElementById("animate");
+    let x = 0;
+    let y = 0;
+
+    function reset() {
+        y = 0;
+        x = 0;
+        elem.style.top = y + "px";
+        elem.style.left = x + "px";
+        clearInterval(id);
+
+    }
+
+    function stopRightThere() {
+
+        y = elem.style.top;
+        x = elem.style.left;
+        clearInterval(id);
+        id = setInterval(frame, 5);
+
+        function frame (){
+            if (x && y) {
+                clearInterval(id)
+            }
+        }
+
+    }
     function myMove() {
-        let id = null;
-        const elem = document.getElementById("animate");
-        let x = 0;
-        let y = 0;
-        console.log(x + ' ' + y);
+        // console.log(x + ' ' + y);
         clearInterval(id);
         id = setInterval(frame, 5);
 
@@ -64,57 +91,60 @@ dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist
         }
     }
 
-    // function myMove2() {
-    //     let id = null;
-    //     const elem = document.getElementById("animate");
-    //     let x = 0;
-    //     let y = 0;
-    //     // console.log(x+' '+y);
-    //     clearInterval(id);
-    //     id = setInterval(frame, 5);
-    //
-    //     function frame() {
-    //         if (x == 350 && y >= 350) {
-    //             clearInterval(id);
-    //         } else {
-    //             if (x == 350 && y < 350) {
-    //                 y+= 100;
-    //                 if (y >= 350) {
-    //                     clearInterval(id);
-    //                 } else {
-    //                     x = 0;
-    //                     x++;
-    //                     elem.style.left = x + "px";
-    //                     elem.style.top = y + "px";
-    //                 }
-    //             } else {
-    //                 x++;
-    //                 elem.style.top = y + "px";
-    //                 elem.style.left = x + "px";
-    //             }
-    //         }
-    //     }
-    // }
     function myMove2() {
-        const elem = document.getElementById("animate");
-        let x = 0;
-        let y = 0;
-        const id = setInterval(frame, 5);
+        // console.log(x+' '+y);
+        clearInterval(id);
+        id = setInterval(frame, 5);
 
         function frame() {
-            if (x >= 350 && y >= 350) {
+            // if red square reaches the end of the container or new changes are bigger than the container
+            if (x == 350 && y >= 350) {
                 clearInterval(id);
             } else {
-                if (x >= 350) {
+                // if red square is at the right end, but has still space to go down
+                if (x == 350 && y < 350) {
+                    // go down 100px
                     y += 100;
-                    x = 0;
+                    // if after adding 100 more px to y-axis, y is bigger than space in container(350),
+                    // then stops where it is
+                    if (y >= 350) {
+                        clearInterval(id);
+
+                    } else {
+                        x = 0;
+                        x++;
+                        elem.style.left = x + "px";
+                        elem.style.top = y + "px";
+                    }
+                } else {
+                    x++;
+                    elem.style.top = y + "px";
+                    elem.style.left = x + "px";
                 }
-                x++;
-                elem.style.top = y + "px";
-                elem.style.left = x + "px";
             }
         }
     }
+
+    // function myMove2() {
+    //     const elem = document.getElementById("animate");
+    //     let x = 0;
+    //     let y = 0;
+    //     const id = setInterval(frame, 5);
+    //
+    //     function frame() {
+    //         if (x >= 350 && y >= 350) {
+    //             clearInterval(id);
+    //         } else {
+    //             if (x >= 350) {
+    //                 y += 100;
+    //                 x = 0;
+    //             }
+    //             x++;
+    //             elem.style.top = y + "px";
+    //             elem.style.left = x + "px";
+    //         }
+    //     }
+    // }
 
 </script>
 </body>
