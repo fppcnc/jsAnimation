@@ -51,11 +51,9 @@ dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist
         elem.style.top = y + "px";
         elem.style.left = x + "px";
         clearInterval(id);
-
     }
 
     function stopRightThere() {
-
         y = elem.style.top;
         x = elem.style.left;
         clearInterval(id);
@@ -66,8 +64,8 @@ dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist
                 clearInterval(id)
             }
         }
-
     }
+
     function myMove() {
         // console.log(x + ' ' + y);
         clearInterval(id);
@@ -108,8 +106,7 @@ dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist
                     // if after adding 100 more px to y-axis, y is bigger than space in container(350),
                     // then stops where it is
                     if (y >= 350) {
-                        clearInterval(id);
-
+                        clearInterval(id);0
                     } else {
                         x = 0;
                         x++;
