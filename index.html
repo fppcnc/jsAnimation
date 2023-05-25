@@ -31,6 +31,11 @@ Aufgabe: das rote Quadrat soll erst nach rechts fahren (innerhalb der gelben FlÃ
  ist es dort angekommen, soll es senkrecht nach unten fahren (innerhalb der gelben FlÃ¤che)
  und dort stehen bleiben-->
 
+<!--
+Aufgabe 2: das Rechteck soll von links nach rechts fahren (innerhalb vom gelben Bereich)
+bei jeder Wende soll es 100 px nach unten fahren,
+dann von links nach rechts fahren, solange bis das Rechteck unten angekommen ist.-->
+
 <script>
     function myMove() {
         let id = null;
@@ -59,39 +64,57 @@ Aufgabe: das rote Quadrat soll erst nach rechts fahren (innerhalb der gelben FlÃ
         }
     }
 
+    // function myMove2() {
+    //     let id = null;
+    //     const elem = document.getElementById("animate");
+    //     let x = 0;
+    //     let y = 0;
+    //     // console.log(x+' '+y);
+    //     clearInterval(id);
+    //     id = setInterval(frame, 5);
+    //
+    //     function frame() {
+    //         if (x == 350 && y >= 350) {
+    //             clearInterval(id);
+    //         } else {
+    //             if (x == 350 && y < 350) {
+    //                 y+= 100;
+    //                 if (y >= 350) {
+    //                     clearInterval(id);
+    //                 } else {
+    //                     x = 0;
+    //                     x++;
+    //                     elem.style.left = x + "px";
+    //                     elem.style.top = y + "px";
+    //                 }
+    //             } else {
+    //                 x++;
+    //                 elem.style.top = y + "px";
+    //                 elem.style.left = x + "px";
+    //             }
+    //         }
+    //     }
+    // }
     function myMove2() {
-        let id = null;
         const elem = document.getElementById("animate");
         let x = 0;
         let y = 0;
-        // console.log(x+' '+y);
-        clearInterval(id);
-        id = setInterval(frame, 5);
+        const id = setInterval(frame, 5);
 
         function frame() {
-            if (x == 350 && y >= 350) {
+            if (x >= 350 && y >= 350) {
                 clearInterval(id);
             } else {
-                if (x == 350 && y < 350) {
-                    y=y + 100;
-                    if (y >= 350) {
-                        clearInterval(id);
-                    } else {
-                        x = 0;
-                        x++;
-                        elem.style.left = x + "px";
-                        elem.style.top = y + "px";
-                    }
-                } else {
-                    x++;
-                    elem.style.top = y + "px";
-                    elem.style.left = x + "px";
+                if (x >= 350) {
+                    y += 100;
+                    x = 0;
                 }
+                x++;
+                elem.style.top = y + "px";
+                elem.style.left = x + "px";
             }
-            
         }
     }
-
 
 </script>
 </body>
